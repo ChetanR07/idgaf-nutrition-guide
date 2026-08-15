@@ -29,7 +29,7 @@ export function ProgressIndicator({ step }: { step: number }) {
   );
 }
 
-export function SectionHeading({ title, subtitle }: { title: string; subtitle?: string }) {
+export function SectionHeading({ title, subtitle }: { title: string; subtitle?: string | undefined }) {
   return (
     <div className="space-y-2">
       <h1 className="text-2xl font-extrabold leading-tight sm:text-3xl">{title}</h1>
@@ -50,7 +50,7 @@ export function OnboardingLayout({
 }: {
   step: number;
   title: string;
-  subtitle?: string;
+  subtitle?: string | undefined;
   children: ReactNode;
   onBack?: () => void;
   onContinue: () => void;
@@ -102,9 +102,9 @@ export function Field({
   htmlFor,
 }: {
   label: string;
-  hint?: string;
-  error?: string;
-  htmlFor?: string;
+  hint?: string | undefined;
+  error?: string | undefined;
+  htmlFor?: string | undefined;
   children: ReactNode;
 }) {
   return (
@@ -125,7 +125,7 @@ export function TextField({
   hint,
   id,
   ...props
-}: React.ComponentProps<typeof Input> & { label: string; error?: string; hint?: string; id: string }) {
+}: React.ComponentProps<typeof Input> & { label: string; error?: string | undefined; hint?: string | undefined; id: string }) {
   return (
     <Field label={label} error={error} hint={hint} htmlFor={id}>
       <Input
@@ -151,7 +151,7 @@ export function SelectCard({
 }: {
   selected: boolean;
   title: string;
-  description?: string;
+  description?: string | undefined;
   icon?: ReactNode;
   onClick: () => void;
   compact?: boolean;
