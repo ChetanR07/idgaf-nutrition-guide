@@ -47,7 +47,7 @@ function Dashboard() {
       </header>
 
       <section className="step-enter mt-8">
-        <h1 className="text-2xl font-extrabold sm:text-3xl">Hey {firstName} 👋</h1>
+        <h1 className="text-2xl font-extrabold sm:text-3xl">Hey {firstName}</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           {profile.primaryGoal
             ? `Working on: ${GOAL_LABEL[profile.primaryGoal]}. We work with your lifestyle, not against it.`
