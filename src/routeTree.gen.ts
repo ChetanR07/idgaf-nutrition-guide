@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as HowItHelpsRouteImport } from './routes/how-it-helps'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HowItHelpsRoute = HowItHelpsRouteImport.update({
@@ -31,30 +37,34 @@ const OnboardingRoute = OnboardingRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
   '/how-it-helps': typeof HowItHelpsRoute
   '/onboarding': typeof OnboardingRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
   '/how-it-helps': typeof HowItHelpsRoute
   '/onboarding': typeof OnboardingRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
   '/how-it-helps': typeof HowItHelpsRoute
   '/onboarding': typeof OnboardingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/how-it-helps' | '/onboarding'
+  fullPaths: '/' | '/dashboard' | '/how-it-helps' | '/onboarding'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/how-it-helps' | '/onboarding'
-  id: '__root__' | '/' | '/how-it-helps' | '/onboarding'
+  to: '/' | '/dashboard' | '/how-it-helps' | '/onboarding'
+  id: '__root__' | '/' | '/dashboard' | '/how-it-helps' | '/onboarding'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DashboardRoute: typeof DashboardRoute
   HowItHelpsRoute: typeof HowItHelpsRoute
   OnboardingRoute: typeof OnboardingRoute
 }
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/how-it-helps': {
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardRoute: DashboardRoute,
   HowItHelpsRoute: HowItHelpsRoute,
   OnboardingRoute: OnboardingRoute,
 }
