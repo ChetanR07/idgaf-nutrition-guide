@@ -17,11 +17,11 @@ export function StepBasics({ onNext, onBack }: { onNext: () => void; onBack: () 
 
   const validate = () => {
     const e: Record<string, string> = {};
-    if (!profile.name.trim()) e.name = "Please tell us your name.";
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(profile.email.trim())) e.email = "Enter a valid email address.";
-    if (!/^[+\d][\d\s-]{6,17}$/.test(profile.phone.trim())) e.phone = "Enter a valid phone number.";
-    if (!profile.dateOfBirth) e.dob = "Please add your date of birth.";
-    if (!profile.gender) e.gender = "Pick an option to continue.";
+    if (!profile.name.trim()) e["name"] = "Please tell us your name.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(profile.email.trim())) e["email"] = "Enter a valid email address.";
+    if (!/^[+\d][\d\s-]{6,17}$/.test(profile.phone.trim())) e["phone"] = "Enter a valid phone number.";
+    if (!profile.dateOfBirth) e["dob"] = "Please add your date of birth.";
+    if (!profile.gender) e["gender"] = "Pick an option to continue.";
     setErrors(e);
     if (Object.keys(e).length === 0) onNext();
   };
@@ -40,7 +40,7 @@ export function StepBasics({ onNext, onBack }: { onNext: () => void; onBack: () 
           label="Full name"
           placeholder="Alex Mercer"
           value={profile.name}
-          error={errors.name}
+          error={errors["name"]}
           onChange={(e) => update({ name: e.target.value })}
         />
         <TextField
@@ -49,7 +49,7 @@ export function StepBasics({ onNext, onBack }: { onNext: () => void; onBack: () 
           type="email"
           placeholder="you@example.com"
           value={profile.email}
-          error={errors.email}
+          error={errors["email"]}
           onChange={(e) => update({ email: e.target.value })}
         />
         <TextField
@@ -58,10 +58,10 @@ export function StepBasics({ onNext, onBack }: { onNext: () => void; onBack: () 
           type="tel"
           placeholder="+91 98765 43210"
           value={profile.phone}
-          error={errors.phone}
+          error={errors["phone"]}
           onChange={(e) => update({ phone: e.target.value })}
         />
-        <Field label="Date of birth" htmlFor="dob" error={errors.dob}>
+        <Field label="Date of birth" htmlFor="dob" error={errors["dob"]}>
           <Input
             id="dob"
             type="date"
@@ -71,14 +71,14 @@ export function StepBasics({ onNext, onBack }: { onNext: () => void; onBack: () 
             className="h-12 rounded-xl bg-card px-4 text-base"
           />
         </Field>
-        <Field label="Gender" error={errors.gender}>
+        <Field label="Gender" error={errors["gender"]}>
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
             {GENDERS.map((g) => (
               <SelectCard
                 key={g.value}
                 compact
                 title={g.label}
-                selected={profile.gender === g.value}
+                selected={profile["gender"] === g.value}
                 onClick={() => update({ gender: g.value })}
               />
             ))}

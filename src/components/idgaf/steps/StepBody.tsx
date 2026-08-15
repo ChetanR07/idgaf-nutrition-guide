@@ -17,10 +17,10 @@ export function StepBody({ onNext, onBack }: { onNext: () => void; onBack: () =>
 
   const validate = () => {
     const e: Record<string, string> = {};
-    if (!profile.height || profile.height <= 0) e.height = "Add your height to continue.";
-    if (!profile.currentWeight || profile.currentWeight <= 0) e.current = "Add your current weight.";
+    if (!profile.height || profile.height <= 0) e["height"] = "Add your height to continue.";
+    if (!profile.currentWeight || profile.currentWeight <= 0) e["current"] = "Add your current weight.";
     if (!maintaining && (!profile.targetWeight || profile.targetWeight <= 0))
-      e.target = "Add a target weight, or switch your goal to maintain.";
+      e["target"] = "Add a target weight, or switch your goal to maintain.";
     setErrors(e);
     if (Object.keys(e).length === 0) onNext();
   };
@@ -72,7 +72,7 @@ export function StepBody({ onNext, onBack }: { onNext: () => void; onBack: () =>
               />
             </div>
           )}
-          {errors.height ? <p className="mt-2 text-xs font-medium text-destructive">{errors.height}</p> : null}
+          {errors["height"] ? <p className="mt-2 text-xs font-medium text-destructive">{errors["height"]}</p> : null}
         </div>
 
         <div className="rounded-2xl border border-border bg-card p-4 sm:p-5">
@@ -88,7 +88,7 @@ export function StepBody({ onNext, onBack }: { onNext: () => void; onBack: () =>
             />
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
-            <Field label="Current weight" error={errors.current}>
+            <Field label="Current weight" error={errors["current"]}>
               <Input
                 inputMode="decimal"
                 placeholder={profile.weightUnit === "kg" ? "68" : "150"}
@@ -99,7 +99,7 @@ export function StepBody({ onNext, onBack }: { onNext: () => void; onBack: () =>
             </Field>
             <Field
               label={maintaining ? "Target weight (optional)" : "Target weight"}
-              error={errors.target}
+              error={errors["target"]}
             >
               <Input
                 inputMode="decimal"
