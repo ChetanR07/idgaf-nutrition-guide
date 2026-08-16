@@ -5,6 +5,7 @@ export interface MacroTargets {
   protein: number;
   carbs: number;
   fat: number;
+  fiber: number;
   water: number; // litres
 }
 
@@ -13,9 +14,11 @@ export interface Totals {
   protein: number;
   carbs: number;
   fat: number;
+  fiber: number;
 }
 
-export const emptyTotals = (): Totals => ({ calories: 0, protein: 0, carbs: 0, fat: 0 });
+export const emptyTotals = (): Totals => ({ calories: 0, protein: 0, carbs: 0, fat: 0, fiber: 0 });
+
 
 const ACTIVITY_FACTOR: Record<string, number> = {
   sedentary: 1.2,
@@ -83,8 +86,10 @@ export function computeTargets(profile: UserProfile): MacroTargets {
   const fat = round((calories * fatPct) / 9, 5);
   const carbs = round(Math.max((calories - protein * 4 - fat * 9) / 4, 60), 5);
   const water = Math.round(Math.min(Math.max(kg * 0.033, 1.8), 4) * 10) / 10;
+  const fiber = round(Math.min(Math.max((calories / 1000) * 14, 20), 45), 1);
 
-  return { calories: round(calories, 10), protein, carbs, fat, water };
+  return { calories: round(calories, 10), protein, carbs, fat, fiber, water };
+
 }
 
 export const GOAL_LABEL: Record<string, string> = {
