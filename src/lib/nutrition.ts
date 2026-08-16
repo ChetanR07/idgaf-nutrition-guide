@@ -5,6 +5,7 @@ export interface MacroTargets {
   protein: number;
   carbs: number;
   fat: number;
+  fiber: number;
   water: number; // litres
 }
 
@@ -13,9 +14,11 @@ export interface Totals {
   protein: number;
   carbs: number;
   fat: number;
+  fiber: number;
 }
 
-export const emptyTotals = (): Totals => ({ calories: 0, protein: 0, carbs: 0, fat: 0 });
+export const emptyTotals = (): Totals => ({ calories: 0, protein: 0, carbs: 0, fat: 0, fiber: 0 });
+
 
 const ACTIVITY_FACTOR: Record<string, number> = {
   sedentary: 1.2,
